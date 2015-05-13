@@ -1,6 +1,7 @@
 # FuzzyString
 
-TODO: Write a gem description
+A ranking system for strings.  The rank by itself is arbitrary and only has context when compared to other ranks.
+The base score is the levenschtein distance which is modified by other basic matching criteria.
 
 ## Installation
 
@@ -20,7 +21,19 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To use as a ranking system (the 'rank' a string has based on another):
+
+```ruby
+    $ 'test case 1'    ^ 'test case' #=>  2.5
+    $ 'test case 1'    ^ 'test'      #=>  8.75
+    $ 'tesla roadster' ^ 'test'      #=> 18.5
+```
+
+To access the levenschtein distance:
+
+```ruby
+    $ 'Test case' - 'case' #=>
+```
 
 ## Contributing
 
@@ -29,3 +42,13 @@ TODO: Write usage instructions here
 3. Commit your changes (`git commit -am 'Add some feature'`)
 4. Push to the branch (`git push origin my-new-feature`)
 5. Create a new Pull Request
+
+Author
+-------
+
+* Chris Moody
+
+License
+-------
+
+This is free software released into the public domain.
