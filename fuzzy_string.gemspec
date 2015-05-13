@@ -9,8 +9,8 @@ Gem::Specification.new do |spec|
   spec.authors       = ["Chris Moody"]
   spec.email         = ["cmoody@transcon.com"]
   spec.summary       = %q{Relative ranking system for strings.}
-  spec.description   = %q{A ranking system for strings.  The rank by itself is arbitrary and only has context /
-                         when compared to other ranks.  The base score is the levenschtein distance which is /
+  spec.description   = %q{A ranking system for strings.  The rank by itself is arbitrary and only has context
+                         when compared to other ranks.  The base score is the levenschtein distance which is
                          modified by other basic matching criteria.}
   spec.homepage      = "https://github.com/transcon/fuzzy_string"
   spec.license       = "MIT"
