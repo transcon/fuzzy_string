@@ -29,7 +29,7 @@ Thumbs.db
 *.rbc
 doc-pak
 description-pak
-
+/pkg/
 
 *.sassc
 .sass-cache
