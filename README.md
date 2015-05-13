@@ -29,10 +29,10 @@ To use as a ranking system (the 'rank' a string has based on another):
     $ 'tesla roadster' ^ 'test'      #=> 18.5
 ```
 
-To access the levenschtein distance:
+To access the levenshtein distance:
 
 ```ruby
-    $ 'Test case' - 'case' #=>
+    $ 'Test case' - 'case' #=> 5
 ```
 
 ## Contributing
