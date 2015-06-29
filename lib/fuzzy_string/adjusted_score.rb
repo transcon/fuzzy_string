@@ -13,6 +13,8 @@ class FuzzyString::AdjustedScore
   def adjusted_levenschtein_distance
     pieces = @first.split(/#{@second.chars.to_a.join('(.*?)')}/i)
     score  = pieces[0][-1] == ' ' ? -1 : 0
+    score += pieces[0..@second.length - 1].uniq == [''] ? -@first.length.to_f / 2 : 0
+    score += (pieces[@second.length] || [])[0] == ' ' ? -@first.length.to_f / 2 : 0
     score += cost(pieces.shift,0.5) + cost(pieces.pop,0.25) + cost(pieces.join,1)
     score += FuzzyString::Levenshtein.distance(@first,@second)
   end

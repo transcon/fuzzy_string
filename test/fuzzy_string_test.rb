@@ -33,4 +33,11 @@ class FuzzyStringTest < MiniTest::Unit::TestCase
     assert 'ZZmonaZ'^'mona' < 'ZZMonaZ'^'mona'
   end
 
+  def test_prioritizes_string_starting_with_exact_match
+    assert 'escreen are where I am at' ^ 'escreen' < 'escreens are' ^ 'escreen'
+  end
+  def test_prioritizes_string_starting_with_match
+    assert 'escreens are' ^ 'escreen' < 'I am a n escreen' ^ 'escreen'
+  end
+
 end
