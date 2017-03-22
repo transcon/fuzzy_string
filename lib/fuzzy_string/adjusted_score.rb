@@ -11,7 +11,10 @@ class FuzzyString::AdjustedScore
     adjusted_levenschtein_distance
   end
   def adjusted_levenschtein_distance
-    pieces = @first.split(/#{@second.chars.to_a.join('(.*?)')}/i)
+    special_chars = [")", "(", "]", "[", "}", "{", ".", "?", "+", "*"]
+    pieces = @first.split(/#{@second.chars.to_a.map do |el|
+      special_chars.includes?(el) ? "\\"+el : el
+    end.join('(.*?)')}/i)
     score  = pieces[0][-1] == ' ' ? -1 : 0
     score += pieces[0..@second.length - 1].uniq == [''] ? -@first.length.to_f / 2 : 0
     score += (pieces[@second.length] || [])[0] == ' ' ? -@first.length.to_f / 2 : 0
