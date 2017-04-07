@@ -1,22 +1,22 @@
 PATH
   remote: .
   specs:
-    fuzzy_string (0.0.2)
+    fuzzy_string (1.1.0)
 
 GEM
   remote: https://rubygems.org/
   specs:
     ansi (1.5.0)
-    awesome_print (1.6.1)
-    builder (3.2.2)
-    minitest (5.6.1)
-    minitest-reporters (1.0.14)
+    awesome_print (1.7.0)
+    builder (3.2.3)
+    minitest (5.10.1)
+    minitest-reporters (1.1.14)
       ansi
       builder
       minitest (>= 5.0)
       ruby-progressbar
-    rake (10.4.2)
-    ruby-progressbar (1.7.5)
+    rake (10.5.0)
+    ruby-progressbar (1.8.1)
 
 PLATFORMS
   ruby
@@ -28,3 +28,6 @@ DEPENDENCIES
   minitest
   minitest-reporters (>= 1.0.1)
   rake (~> 10.0)
+
+BUNDLED WITH
+   1.14.6

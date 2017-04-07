@@ -1,24 +1,27 @@
 class FuzzyString::AdjustedScore
   def self.rank(first,second) new(first,second).rank end
   def initialize(first,second)
-    @first  = first.length < second.length ? first  : second
-    @second = first.length < second.length ? second : first
+    @long  = first.length > second.length ? first  : second
+    @short = first.length > second.length ? second : first
   end
   def rank
-    return 0              if (@first == @second)
-    return @second.length if (@first.length == 0)
-    return @first.length  if (@second.length == 0)
+    return 0             if (@long == @short)
+    return @short.length if (@long.length  == 0)
+    return @long.length  if (@short.length == 0)
     adjusted_levenschtein_distance
   end
   def adjusted_levenschtein_distance
     special_chars = [")", "(", "]", "[", "}", "{", ".", "?", "+", "*"]
-    regex = /#{@second.chars.to_a.map{|el| special_chars.includes?(el) ? "\\"+el : el}.join('(.*?)')}/i
-    pieces = @first.split(regex)
-    score  = pieces[0][-1] == ' ' ? -1 : 0
-    score += pieces[0..@second.length - 1].uniq == [''] ? -@first.length.to_f / 2 : 0
-    score += (pieces[@second.length] || [])[0] == ' ' ? -@first.length.to_f / 2 : 0
-    score += cost(pieces.shift,0.5) + cost(pieces.pop,0.25) + cost(pieces.join,1)
-    score += FuzzyString::Levenshtein.distance(@first,@second)
+    regex = /#{@short.chars.to_a.map{|el| special_chars.include?(el) ? "\\"+el : el}.join('(.*?)')}/i
+    pieces = @long.split(regex)
+    score = FuzzyString::Levenshtein.distance(@short,@long)
+    score *= pieces[0..@short.length - 1].uniq == [''] ? 0.75 : 1
+    letter_ratio = score.to_f / @long.length
+    score -= pieces[0][-1] == ' ' ? letter_ratio * 0.75 : 0
+    score -= (pieces[@short.length] || [])[0]  == ' '  ? letter_ratio * @short.length * 0.75 : 0
+    score -= letter_ratio * cost(pieces.shift,0.5)
+    score -= letter_ratio * cost(pieces.pop,  0.9)
+    score -= letter_ratio * cost(pieces.join, 0.1)
   end
   private
   def cost(piece,multiplier) piece.length * multiplier rescue(0) end

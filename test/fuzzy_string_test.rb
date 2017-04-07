@@ -39,5 +39,7 @@ class FuzzyStringTest < MiniTest::Unit::TestCase
   def test_prioritizes_string_starting_with_match
     assert 'escreens are' ^ 'escreen' < 'I am a n escreen' ^ 'escreen'
   end
-
+  def test_prioritizes_exact_sub_strings
+    assert 'ACME' ^ 'ACME Utility' < 'ACME' ^ 'ACT Me 2'
+  end
 end
